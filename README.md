@@ -5,9 +5,9 @@ This repository will contain all the information related to the project of the c
 3.- [Exercises repository](https://github.com/Samius1/CC2021-Exercises). This repository will contain the exercises of the subject.  
 
 
-#First steps  
+# First steps  
 We first need to configure to our GitHub environment. Follow this [link](./docs/firstSteps.md), where you can find how I configured my GitHub environment.
 
-#Introduction  
+# Introduction  
 This project will bring to life a new way of selling. It is focused on how to improve the sale of items through a friendly user interface. It will allow a manager to control the stock of the products over different establishments and to review the sales grouped by some criteria.  
 This application will be available as a website in its first version.  
