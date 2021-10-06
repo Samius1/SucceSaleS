@@ -1,8 +1,8 @@
-# CC2021-Project
-This repository will contain all the information related to the project of the course Cloud Computing 20/21. In this subject, we are going to mantain three main repositories:  
-1.- [CC fork repository](https://github.com/Samius1/CC-20-21). This repository is a common repository with all the students and the professor.  
-2.- [Project repository](https://github.com/Samius1/CC2021-Project). This repository holds the code of our application.  
-3.- [Exercises repository](https://github.com/Samius1/CC2021-Exercises). This repository will contain the exercises of the subject.  
+# SucceSaleS
+This repository will contain all the information related to the project of the course Cloud Computing 21/22. In this subject, we are going to mantain three main repositories:  
+1.- [CC fork repository](https://github.com/Samius1/CC-21-22). This repository is a common repository with all the students and the professor.  
+2.- [Project repository](https://github.com/Samius1/SucceSaleS). This repository holds the code of our application.  
+3.- [Exercises repository](https://github.com/Samius1/CC2122-Exercises). This repository will contain the exercises of the subject.  
 
 
 # First steps  

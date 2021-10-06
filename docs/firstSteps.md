@@ -31,9 +31,9 @@ First, we are going to configure the pull command so it always works as if rebas
 ```
 git config --global pull.rebase true
 ```
-After that, we go to the folder where we stored the [common project](https://github.com/JJ/CC-20-21) and execute the next command line.
+After that, we go to the folder where we stored the [common project](https://github.com/JJ/CC-21-22) and execute the next command line.
 ```
-git remote add upstream https://github.com/JJ/CC-20-21
+git remote add upstream https://github.com/JJ/CC-21-22
 ```
 Now we are going to configure the user name and user email, just by tiping the next command line.
 ```
