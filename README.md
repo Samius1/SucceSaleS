@@ -12,5 +12,5 @@ We first need to configure to our GitHub environment. Follow this [link](./docs/
 This project will bring to life a new way of selling for companies who sells perishable food like fish, vegetables, etc. Nowadays, there are an increasing number of small shops specialising in selling perishable food. This increase has arrised a new problem, waste. Lately, the amount of food rotting on shelves is higher. Sellers have to increase the price of the food to keep their business running. This price increase ends up in losing clients due to non competitive prices. The main focus of this application is improving the profit by reducing waste. In order to achieve this, the application will give a prediction of sales based on sales history. 
 
 # Documentation
-- [User Journey](./docs/userJourney.md)
+- [User Journey and User Stories](./docs/userJourney.md)
 - [Minimum Viable Product](./docs/pmv.md)
