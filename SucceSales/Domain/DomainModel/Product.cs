@@ -1,4 +1,3 @@
-
 namespace Domain.DomainModel
 {
     public class Product : IProduct
