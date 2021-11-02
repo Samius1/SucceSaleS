@@ -14,3 +14,5 @@ This project will bring to life a new way of selling for companies who sells per
 # Documentation
 - [User Journey and User Stories](./docs/userJourney.md)
 - [Minimum Viable Product](./docs/pmv.md)
+- [Task Manager](./docs/taskManager.md)
+- [Test Framework and Assert Library](./docs/testFramework.md)
