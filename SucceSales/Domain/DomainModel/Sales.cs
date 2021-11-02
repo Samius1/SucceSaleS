@@ -1,4 +1,3 @@
-
 namespace Domain.DomainModel
 {
     using System;
