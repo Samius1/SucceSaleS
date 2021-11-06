@@ -1,7 +1,10 @@
-fichero_tareas: build.sh
-lenguaje: c#
+fichero_tareas: 
+  - build.sh
+lenguaje: 
+  - c#
 entidad:
-  iProduct: SucceSales/Domain/DomainModel/IProduct.cs
-  product: SucceSales/Domain/DomainModel/Product.cs
-  sales: SucceSales/Domain/DomainModel/Sales.cs
-test: SucceSales.Tests/Controllers/SalesControllerTests.cs
+  - SucceSales/Domain/DomainModel/IProduct.cs
+  - SucceSales/Domain/DomainModel/Product.cs
+  - SucceSales/Domain/DomainModel/Sales.cs
+test: 
+  - SucceSales.Tests/Controllers/SalesControllerTests.cs
