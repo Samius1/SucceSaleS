@@ -1,4 +1,4 @@
-namespace Domain.DomainModel
+namespace SucceSales.Domain.DomainModel
 {
     using Microsoft.EntityFrameworkCore;
     
