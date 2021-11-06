@@ -4,4 +4,4 @@ entidad:
   iProduct: SucceSales/Domain/DomainModel/IProduct.cs
   product: SucceSales/Domain/DomainModel/Product.cs
   sales: SucceSales/Domain/DomainModel/Sales.cs
-test: 
+test: SucceSales.Test/Controllers/SalesControllerTests.cs
