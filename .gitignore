@@ -1,3 +1,5 @@
 *.backup
 obj
 bin
+temp
+build.schema.json

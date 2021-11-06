@@ -1,4 +1,4 @@
-fichero_tareas: 
+fichero_tareas: build.sh
 lenguaje: c#
 entidad:
   iProduct: SucceSales/Domain/DomainModel/IProduct.cs
