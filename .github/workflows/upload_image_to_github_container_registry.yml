@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Upload the image to GitHub Container registry
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ghcr.io/samius1/succesales:latest
+    - uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload the image
+      run: docker push ghcr.io/samius1/succesales:latest
