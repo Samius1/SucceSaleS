@@ -34,6 +34,14 @@ As we said in the above paragraph, the initial intention was to be able to creat
 
 As expected, this image was pretty small but it was really hard to make it work. [The documentation](https://hub.docker.com/_/scratch) states that this image should be use just as base for debian images or for single binaries and its dependencies, which is not the case of this project. Additionally, we checked that the [ubuntu image chosen](https://github.com/tianon/docker-brew-ubuntu-core/blob/570d5970a8b18bc772ad2c3eb1ce8fd0887d991a/focal/Dockerfile) to investigate is just a scratch image with ubuntu, so we consider that the alpine image and that one are enough for the scope of this project and could show similar results at the end.
 
+## Improvements
+After the initial docker file, some improvements have been implemented.
+- Added .gitignore file to ignore some files.
+- Added multi-stage build to reduce the final image size.
+
+Now the image size is half of the initial one or less, only 539Mb.
+![Scratch image](images/ImageSizeImprovements.png)
+
 # Docker Hub
 In this section, we will describe the steps to upload the image to Docker Hub. We are going to skip the login steps since they are pretty similar to all the online platforms. Our name was not taken so we could just create our account with our GitHub nickname.
 
