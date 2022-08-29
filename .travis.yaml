@@ -1,0 +1,6 @@
+language: csharp
+mono: none
+dotnet: 5.0
+solution:
+script:
+  - dotnet test SucceSales.Tests/SucceSales.Tests.csproj --configuration Release --nologo --blame

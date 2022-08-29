@@ -17,3 +17,7 @@ This project will bring to life a new way of selling for companies who sells per
 - [Task Manager](./docs/taskManager.md)
 - [Test Framework and Assert Library](./docs/testFramework.md)
 - [Test container with Docker, Docker Hub and GitHub Container Registry](./docs/docker.md)
+- [Continuous Integration/Continous Delivery](./docs/cicd.md)
+
+# License
+This project is licensed under the [GNU Affero General Public License v3.0](./LICENSE).
