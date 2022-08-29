@@ -50,3 +50,75 @@ After the log in is successful, there is only one command left to upload the ima
 
 Finally, if you go to the repository page, there will be a new image uploaded with the tag you selected.
 ![Image uploaded to Docker Hub](images/DH-ImageUploaded.png)
+
+# Automated Builds
+In this section we will describe how we configured the automated builds in Docker Hub and GitHub Container Registry.
+
+## Docker Hub
+Now that we have our image on Docker Hub, the next step is setting up Docker Hub to be trigger and create a new image automatically when we push a change to our *main* branch. You can set up any branch to trigger this automated process, but we will only use main for simplicity.
+
+So we go to "Builds" inside our Docker Hub repository and we select to link it with Git Hub. ![Automated Builds Docker Hub page](images/DH-LinkMethods.png)
+
+Now we have to link our GitHub account with Docker Hub, so we select "Link provider". ![Linked accounts page](images/DH-LinkedAccounts.png)
+
+Docker Hub will ask for authorization in our GitHub account, so we will have to authorize it. ![Authorize Docker Hub into GitHub](images/DH-AuthorizeDockerHub.png) ![Two factor Authenticator GitHub](images/DH-TwoFactorAuthenticator.png)
+
+After that, we will have our accounts linked and now we can continue to configure the automated builds. ![Automated builds linked](images/DH-AutomatedBuildsLinked.png)
+
+Since this is the first configuration, we will just use the default configuration that Docker Hub provides. Later on, we will modify it accordingly to the needs of the project.
+![Default automated configuration](images/DH-DefaultAutomatedConfiguration.png)
+
+Finally, we have our project sets and we can see it in the "Builds" tab, where it is shown the information related with the automated builds activity.
+![Automated builds activity](images/DH-AutomatedBuildsActivity.png)
+
+## GitHub Container Registry
+As we did with Docker Hub, the firt step is going to add the image to GitHub. Since we were logged in Docker Hub, we need to do log in to GitHub. Remember to use a token, not the GitHub password.
+    
+    docker login ghcr.io -u "Samius1" --password-stdin
+
+After the log in is successful, we just need to upload the image to GitHub with the usual command.
+
+    docker push ghcr.io/samius1/succesales:latest
+
+To see the new image upload, we have to go to the "Packages" tab in our GitHub profile page. ![Image uploaded in GitHub](images/GRC-ImageUploaded.png)
+
+As you can see in the image above, the initial package is uploaded as "private", so we are going to change it to "public" in order to be able to use the command specified in the documentation of the subject but pointing to GitHub instead of Docker Hub.
+
+    docker run -t -v `pwd`:/app/test ghcr.io/samius1/succesales:latest
+
+Go to the "Danger zone" section in the "Settings" of the project and just set it as public there.
+![Danger zone in settings section](images/GRC-DangerZone.png)
+![Set the package to public](images/GRC-SetToPublic.png)
+
+After that, we can execute the command for our local console and see that it is working as expected.
+![Command succesfully executed](images/GRC-CommandExecution.png)
+
+Now, we need to link the image to our repository in order to be able to see the readme from the package and to see the package from the repository, since it is not linked by default. As you can see in the below picture, you can do it manually or by adding a line in the dockerfile. Since this is done just once, we are going to do it manually.
+![Manually added the link between the package and the repository](images/GRC-LinkRepository.png)
+
+After that, we can check in our repository that we have the link to the package.
+![Check link in the repository](images/GRC-CheckRepository.png)
+![Check link in the package](images/GRC-CheckPackage.png)
+
+To be able to use GitHub actions in our package, we need to give permissions to it, as by default it has no write permission, even though we just linked it. So go to the settings section of the package and add the "Write" role/permission to our project.
+![Package has no actions repository](images/GRC-NoActionRepositoryIsSet.png)
+![Write permission granted](images/GRC-GrantWritePermission.png)
+
+Now we can move onto the next topic, creating a GitHub action to upload new images automatically on every commit to GitHub Container Registry. To do so, we need to create an Action in our repository. By default, GitHub offers a selection of images, so we just select the docker one.
+![Default docker action](images/GRC-SelectedActionType.png)
+
+The action by default doesn't contain all the steps needed to upload the image to the Registry, so we just modify it to do as we desire.
+![GitHub Action to upload the image](images/GRC-UploadImageAction.png)
+
+Basically, it builds the application, then logs in to the registry with our credentials and upload the image when we push to the main branch. As you can see, now we have a proper GitHub action working in place.
+![GitHub Action first execution](images/GRC-SuccesfulUploadActionExecution.png)
+
+## Conclusions
+Both platforms have their unique focus.
+On one hand, Docker Hub automation is pretty straigh forward. With a few clicks you can have everything set in place. 
+On the other hand, GitHub Container Registry requires a little bit more of set up, including repository configuration and GitHub actions.
+
+The drawbacks of Docker Hub is that it is not free and that it has no way to give custom security permissions.
+The drawbacks of GitHub Container Registry is the initial effort to configure everything. It is very time consuming and it requires to research through different topics as GitHub actions and packages.
+
+The chosen platform to automate the process of this project is GitHub. It is the platform that stores the project itself and it has no cost associate. Even though it is extremely time consuming to set up at the beginning, it has enhanced the knowledge of GitHub actions and packaged, which will be needed in the future.

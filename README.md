@@ -16,3 +16,4 @@ This project will bring to life a new way of selling for companies who sells per
 - [Minimum Viable Product](./docs/pmv.md)
 - [Task Manager](./docs/taskManager.md)
 - [Test Framework and Assert Library](./docs/testFramework.md)
+- [Test container with Docker, Docker Hub and GitHub Container Registry](./docs/docker.md)
