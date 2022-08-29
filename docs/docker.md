@@ -38,6 +38,7 @@ As expected, this image was pretty small but it was really hard to make it work.
 After the initial docker file, some improvements have been implemented.
 - Added .gitignore file to ignore some files.
 - Added multi-stage build to reduce the final image size.
+- New image selected as the best one, the alpine from microsoft.
 
 Now the image size is half of the initial one or less, only 539Mb.
 ![Scratch image](images/ImageSizeImprovements.png)
