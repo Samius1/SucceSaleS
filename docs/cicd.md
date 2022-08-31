@@ -72,5 +72,20 @@ Since GitHub Actions shares domain with GitHub, we don't need to add any new int
 To do that, we had already implemented the workflow in the last milestone. In this one, we will update it to execute the tests before uploading the image to the registry.
 ![Updated GitHub Action to run the tests](./images/GHA-UpdatedGitHubAction.png)
 
-After that, when we commit the change to the main branch, the image is automatically uploaded in GitHub Container Registry.
-![Image uploaded to GitHub Container Registry](./images/GHA-ImageUploadedToGitHubRegistry.png) 
+After that, when we commit the change to the main branch, the tests are executed and if they pass, the image is automatically uploaded in GitHub Container Registry.
+![GitHub Action executed successfully](./images/GHA-TestsExecutionPassed.png)
+![Image uploaded to GitHub Container Registry](./images/GHA-ImageUploadedToGitHubRegistry.png)
+
+# Additional notes
+After all the integrations are in place, we can see that Travis and GitHub Actions are executed when our pipelines run.
+![Travis CI and GitHub Actions integration in pipelines](./images/CICD-PipelineExecutions.png)
+
+## Build stage
+Someone may wonder why we are not using any build stage explicitly. In every usual cloud deployment workflow, the first step is "build the app". In .NET, we do a little improvement by skipping this step. Why do we skip it? Because when we execute the command "dotnet test ...", the first step it does is to compile the app. So if the compilation fails, it will fail before the tests are executed, as in every other language. 
+So when we execute the tests in .NET, we are compiling implicitly.
+
+## Project status after the continuous integration part
+I'm pretty happy with the actual status of the project.
+The application may not have that much logic, but I have been working with multiple .NET projects and, the more advanced the project was, the harder it was to upload it to the cloud. Right now, we are not using Terraform or Helm to deploy it, but if we had a bigger application, it would be pretty difficult to do what we have done in this milestone.
+
+If I may have a word for the generations to come, I recommend you to do your project this way if you find hard to develop the application while "clouding" it. You will learn a lot about the cloudbecause you will be able to focus on learning it.
