@@ -58,11 +58,12 @@ In order to upload the image to Docker Hub, we need to set the user and password
 To do that, we just go to the repository and then open "Settings" in the "More options" menu at the top right side of the screen.
 Then, we add both variables in the "Environment Variables" section and the configuration will be done.
 ![Setting up the environment in Travis](./images/Travis-SetEnvironmentVariables.png)
+*Note: Remember to escape any [special character](https://tldp.org/LDP/abs/html/special-chars.html) that you use in your Travis environment variables.
 
 After that, we need to modify the .travis.yaml file to upload the image to Docker Hub after the tests pass.
 ![Script to upload an image to Docker Hub from Travis](./images/Travis-UploadDockerHubImageScript.png)
 
-If we go to Docker Hub, we will see that the new image is uploaded after Travis is done.
+If we go to Docker Hub, we will see that the new image is uploaded after [Travis build](https://app.travis-ci.com/github/Samius1/SucceSaleS/builds/255042717) is done.
 ![Docker Hub new image from Travis](./images/Travis-ImageUploadedToDockerHub.png)
 
 # GitHub Actions
