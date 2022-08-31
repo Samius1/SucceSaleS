@@ -1,3 +1,5 @@
+![GitHub test execution status](https://github.com/samius1/succesales/actions/workflows/upload_image_to_github_container_registry.yml/badge.svg?branch=main)
+![Travis CI test execution status](https://api.travis-ci.com/Samius1/SucceSaleS.svg?branch=main)
 # SucceSaleS
 This repository will contain all the information related to the project of the course Cloud Computing 21/22. In this subject, we are going to mantain three main repositories:  
 1.- [CC fork repository](https://github.com/Samius1/CC-21-22). This repository is a common repository with all the students and the professor.  
