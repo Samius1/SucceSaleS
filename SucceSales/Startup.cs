@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SucceSales.Domain.DomainModel;
+using SucceSales.Storage;
 
 namespace SucceSales
 {
@@ -26,7 +26,7 @@ namespace SucceSales
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SucceSales", Version = "v1" });
             });
-            services.AddDbContext<SalesContext>(opt =>
+            services.AddDbContext<SucceSalesContext>(opt =>
                                                opt.UseInMemoryDatabase("AllSales"));
         }
 
