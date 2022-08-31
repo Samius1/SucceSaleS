@@ -1,9 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS builder
 WORKDIR /SucceSales
 COPY . .
-RUN ./build.sh
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine 
-WORKDIR /test
-COPY --from=builder /SucceSales .
-ENTRYPOINT ["dotnet", "test"]
+WORKDIR /SucceSales
+COPY --from=builder /SucceSales/out .
+ENTRYPOINT ["dotnet", "SucceSales.dll"]

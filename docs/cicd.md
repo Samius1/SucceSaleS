@@ -40,6 +40,7 @@ To integrate Travis CI into GitHub, we just need to do some simple steps.
 2. Authorize Travis permissions to GitHub clicking on "Authorize Travis CI".
 3. Follow the [tutorial](https://app.travis-ci.com/getting_started) given by Travis.
 4. Approve and install Travis CI in GitHub.
+
 ![Install Travis in GitHub](./images/Travis-InstallInGitHub.png)
 5. Check that the application is integrated in GitHub. 
 ![Check Travis application in GitHub](./images/Travis-CheckedInGitHub.png)
@@ -48,6 +49,21 @@ To integrate Travis CI into GitHub, we just need to do some simple steps.
 ![Free plan in Travis](./images/Travis-FreePlanInTravis.png)
 7. Create a ".travis.yaml" file with the necessary information and push it to GitHub.
 ![.travis.yaml file](./images/Travis-yaml.png)
+8. Now we can go to Travis and check that it has run and passed in green.
+![Successful run of .travis.yaml](./images/Travis-SuccessfulRun.png)
+
+The next step is to dockerize the image and upload to the expected environments. Since we will use GitHub Actions, we will upload the image to Docker Hub with Travis CI and we will upload the image to GitHub Container Registry with GitHub Actions. 
+
+In order to upload the image to Docker Hub, we need to set the user and password of Docker Hub in Travis.
+To do that, we just go to the repository and then open "Settings" in the "More options" menu at the top right side of the screen.
+Then, we add both variables in the "Environment Variables" section and the configuration will be done.
+![Setting up the environment in Travis](./images/Travis-SetEnvironmentVariables.png)
+
+After that, we need to modify the .travis.yaml file to upload the image to Docker Hub after the tests pass.
+![Script to upload an image to Docker Hub from Travis](./images/Travis-UploadDockerHubImageScript.png)
+
+If we go to Docker Hub, we will see that the new image is uploaded after Travis is done.
+![Docker Hub new image from Travis](./images/Travis-ImageUploadedToDockerHub.png)
 
 # GitHub Actions
 
