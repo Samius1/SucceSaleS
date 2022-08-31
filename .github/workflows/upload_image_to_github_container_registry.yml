@@ -1,16 +1,22 @@
-name: Docker Image CI
+name: Test and Docker Image CI
 
-on:
-  push:
-    branches: [ "main" ]
+on: push
 
 jobs:
-  publish:
+  test:
     runs-on: ubuntu-latest
-    name: Upload the image to GitHub Container registry
+    name: Run application tests
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Tests
+      run: dotnet test SucceSales.Tests/SucceSales.Tests.csproj --configuration Release --nologo --blame
+  publish:
+    runs-on: ubuntu-latest
+    needs: test
+    name: Upload the image to GitHub Container registry
+    if: github.ref == 'refs/heads/main'
+    steps:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ghcr.io/samius1/succesales:latest
     - uses: docker/login-action@v2
