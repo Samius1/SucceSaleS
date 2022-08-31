@@ -67,4 +67,10 @@ If we go to Docker Hub, we will see that the new image is uploaded after [Travis
 ![Docker Hub new image from Travis](./images/Travis-ImageUploadedToDockerHub.png)
 
 # GitHub Actions
+Since GitHub Actions shares domain with GitHub, we don't need to add any new integration. In this case, we are going to upload the image to the GitHub Container Registry, so each system will have their own integration.
 
+To do that, we had already implemented the workflow in the last milestone. In this one, we will update it to execute the tests before uploading the image to the registry.
+![Updated GitHub Action to run the tests](./images/GHA-UpdatedGitHubAction.png)
+
+After that, when we commit the change to the main branch, the image is automatically uploaded in GitHub Container Registry.
+![Image uploaded to GitHub Container Registry](./images/GHA-ImageUploadedToGitHubRegistry.png) 
