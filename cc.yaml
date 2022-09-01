@@ -8,3 +8,5 @@ entidad:
   - SucceSales/Domain/DomainModel/Sales.cs
 test: 
   - SucceSales.Tests/Controllers/SalesControllerTests.cs
+
+make: ./build.sh
