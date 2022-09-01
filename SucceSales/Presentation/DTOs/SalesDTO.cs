@@ -7,7 +7,6 @@ namespace SucceSales.Presentation.DTOs
         string ProductName, 
         decimal Quantity, 
         decimal Price, 
-        DateTime Date, 
-        decimal TotalImport
+        DateTime Date
     );
 }

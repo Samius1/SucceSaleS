@@ -37,9 +37,9 @@
         [HttpPost]
         public async Task<ActionResult<SalesDTO>> PostSale(SalesDTO sale)
         {
-            SalesValidator.ValidateSale(sale);
+            SalesSyntacticValidator.ValidateSale(sale);
             
-            var mappedSale = new Sales(0, sale.ProductId, sale.ProductName, sale.Quantity, sale.Price, sale.Date, sale.TotalImport);
+            var mappedSale = new Sales(0, sale.ProductId, sale.ProductName, sale.Quantity, sale.Price, sale.Date);
 
             _context.Sales.Add(mappedSale);
             

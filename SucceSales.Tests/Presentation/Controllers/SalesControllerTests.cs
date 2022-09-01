@@ -16,7 +16,7 @@ namespace SucceSales.Tests.Presentation.Controllers
     public class SalesControllerTests
     {
         private readonly SalesController _salesController;
-        private readonly Sales _firstSale = new Sales(0, 1, "Banana", 3m, 5m, DateTime.Now, 15m);
+        private readonly Sales _firstSale = new Sales(0, 1, "Banana", 3m, 5m, DateTime.Now);
 
         public SalesControllerTests()
         {
@@ -33,7 +33,7 @@ namespace SucceSales.Tests.Presentation.Controllers
         [Fact]
         public void TestPostSale_PostNewSale_ReturnsCreated201()
         {
-            var expectedSale = new SalesDTO(1, "Banana", 4.0m, 5.0m, DateTime.Now, 20.0m);
+            var expectedSale = new SalesDTO(1, "Banana", 4.0m, 5.0m, DateTime.Now);
             
             var result = _salesController.PostSale(expectedSale);
 
