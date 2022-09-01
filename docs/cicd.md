@@ -89,3 +89,17 @@ I'm pretty happy with the actual status of the project.
 The application may not have that much logic, but I have been working with multiple .NET projects and, the more advanced the project was, the harder it was to upload it to the cloud. Right now, we are not using Terraform or Helm to deploy it, but if we had a bigger application, it would be pretty difficult to do what we have done in this milestone.
 
 If I may have a word for the generations to come, I recommend you to do your project this way if you find hard to develop the application while "clouding" it. You will learn a lot about the cloudbecause you will be able to focus on learning it.
+
+## External course repository pipeline
+While executing the external course repository, we have found two different errors.
+One was fixed as the stages in our project were different from the ones expected in the external course pipeline.
+
+The other one has been impossible to revolve. It states that it is not possible to execute the following sentence within our image.
+    docker run -t -v `pwd`:/app/test samius1/succesales:latest sh -c "ls && ./build.sh build && ./build.sh install && ./build.sh test"
+
+It fails because it can not find the project file,as you can see in the following image, but the "Switch:" part, which usually gives a meaningful error like the name of the project file, just says "sh". So it seems like it is related with executing the sh in the docker, maybe the path changes because the data is moved to the /app/test folder.
+![Unable to execute the project from the "docker run... sh..." command line](./images/CICD-ErrorExecutingDockerRun.png)
+
+When you execute both command separated, they work just fine, so we finally moved to add logic to our application, since it seems like an external issue, which would be managed with Infraestructure team in a real environment.
+![Both parts of the command separately executed](./images/CICD-SuccesfulIndividuallySteps.png)
+
