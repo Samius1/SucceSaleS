@@ -15,12 +15,12 @@ namespace SucceSales.Presentation.Validators
 
             if (sale.Quantity <= 0)
             {
-                errors = $"{nameof(sale.Quantity)} for {sale.ProductName} can not be 0 or smaller.\n";
+                errors = $"{errors}{nameof(sale.Quantity)} for {sale.ProductName} can not be 0 or smaller.\n";
             }
 
             if (string.IsNullOrWhiteSpace(sale.ProductName))
             {
-                errors = $"{nameof(sale.ProductName)} can not be empty.";
+                errors = $"{errors}{nameof(sale.ProductName)} can not be empty.";
             }
 
             return errors;
