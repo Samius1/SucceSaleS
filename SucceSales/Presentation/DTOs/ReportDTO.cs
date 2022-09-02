@@ -2,11 +2,10 @@ namespace SucceSales.Presentation.DTOs
 {
     using System;
     
-    public record SalesDTO(
+    public record ReportDTO(
         int ProductId, 
         string ProductName, 
-        decimal Quantity, 
-        decimal Price, 
+        decimal Quantity,
         DateTime Date
     );
 }

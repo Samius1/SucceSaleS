@@ -4,7 +4,7 @@ namespace SucceSales.Presentation.Validators
 
     public static class SalesSyntacticValidator
     {
-        public static string ValidateSale(SalesDTO sale)
+        public static string ValidateSale(SaleDTO sale)
         {
             var errors = string.Empty;
 

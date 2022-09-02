@@ -1,7 +1,11 @@
 namespace SucceSales.Storage.Repositories
 {
     using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using SucceSales.Storage.Entities;
 
     public class SalesRepository : ISalesRepository
     {
@@ -12,12 +16,12 @@ namespace SucceSales.Storage.Repositories
             _dbContext = dbContext;
         }
 
-        public Task<Sale> GetByIdAsync(int id)
+        public async Task<Sale> GetByIdAsync(int id)
         {
-            return await _dbContext.Set<Sale>().AsNoTracking().FindAsync(id);
+            return await _dbContext.Set<Sale>().FindAsync(id);
         }
         
-        public Task AddAsync(Sale sale)
+        public async Task AddAsync(Sale sale)
         {
             _dbContext.Entry(sale).State = EntityState.Detached;
             await _dbContext.Set<Sale>().AddAsync(sale);
@@ -26,7 +30,7 @@ namespace SucceSales.Storage.Repositories
 
         public async Task<IEnumerable<Sale>> GetByPeriod(DateTime start, DateTime end)
         {
-            return await dbContext.Set<Sale>().AsNoTracking().Where(x => x.Date >= start && x.Date <= end).ToListAsync();    
+            return await _dbContext.Set<Sale>().AsNoTracking().Where(x => x.Date >= start && x.Date <= end).ToListAsync();    
         }
     }
 }
