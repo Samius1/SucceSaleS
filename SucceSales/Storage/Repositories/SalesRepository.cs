@@ -16,9 +16,9 @@ namespace SucceSales.Storage.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<Sale> GetByIdAsync(int id)
+        public Sale GetById(int id)
         {
-            return await _dbContext.Set<Sale>().FindAsync(id);
+            return _dbContext.Set<Sale>().Find(id);
         }
         
         public async Task AddAsync(Sale sale)

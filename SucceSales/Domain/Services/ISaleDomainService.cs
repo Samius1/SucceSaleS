@@ -7,7 +7,7 @@ namespace SucceSales.Domain.Services
     
     public interface ISaleDomainService
     {
-        Task<SaleMessage> GetSaleByIdAsync(int id);
+        SaleMessage GetSaleById(int id);
 
         Task SaveAsync(SaleMessage saleMessage);
 

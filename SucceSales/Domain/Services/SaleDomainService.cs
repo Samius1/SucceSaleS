@@ -17,9 +17,9 @@ namespace SucceSales.Domain.Services
             _salesRepository = salesRepository;
         }
 
-        public async Task<SaleMessage> GetSaleByIdAsync(int Id)
+        public SaleMessage GetSaleById(int Id)
         {
-            var sale = await _salesRepository.GetByIdAsync(Id);
+            var sale = _salesRepository.GetById(Id);
 
             return new SaleMessage(sale.ProductId, sale.ProductName, sale.Quantity, sale.Price, sale.Date);
         }
@@ -38,11 +38,12 @@ namespace SucceSales.Domain.Services
             var saleMessages = new List<SaleMessage>();
             foreach(var sale in sales
                             .GroupBy(x => new { x.Date, x.ProductId })
-                            .Select(x => new SaleMessage(x.))
+                            .Select(x => new { x.Key.ProductId, x.Key.Date, TotalSales = x.ToList()})
                             .ToList())
             {
-                //saleMessages.Add(new SaleMessage(sale.productId, sale.ProductName, sale.Quantity, sale. Price, sale.Date));
-                saleMessages.Add(sale);
+                var defaultSale = sale.TotalSales.First();
+                saleMessages.Add(new SaleMessage(sale.ProductId, defaultSale.ProductName, 
+                                sale.TotalSales.Sum(x => x.Quantity), defaultSale.Price, sale.Date));
             }
 
             return saleMessages;

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SucceSales.Infraestructure.DependencyInjection;
 using SucceSales.Storage;
 
 namespace SucceSales
@@ -28,6 +29,8 @@ namespace SucceSales
             });
             services.AddDbContext<SucceSalesContext>(opt =>
                                                opt.UseInMemoryDatabase("AllSales"));
+
+            services.ConfigureDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

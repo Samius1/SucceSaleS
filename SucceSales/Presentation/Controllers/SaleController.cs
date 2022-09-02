@@ -24,16 +24,16 @@
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<SaleDTO>> GetSale(int id)
+        public ActionResult<SaleDTO> GetSale(int id)
         {
-            var actualSale = await _salesDomainService.GetSaleByIdAsync(id);
+            var actualSale = _salesDomainService.GetSaleById(id);
 
             if (actualSale == null)
             {
                 return NotFound();
             }
 
-            return new SaleDTO(actualSale.ProductId, actualSale.ProductName, actualSale.Quantity, actualSale.Price, actualSale.Date);
+            return Ok(new SaleDTO(actualSale.ProductId, actualSale.ProductName, actualSale.Quantity, actualSale.Price, actualSale.Date));
         }
 
         [HttpPost]

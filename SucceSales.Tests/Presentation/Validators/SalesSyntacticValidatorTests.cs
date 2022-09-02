@@ -53,9 +53,9 @@ namespace SucceSales.Tests.Presentation.Controllers
             Check.That(result).IsEqualTo($"Price for {saleDTO.ProductName} can not be 0 or smaller.\nQuantity for {saleDTO.ProductName} can not be 0 or smaller.\nProductName can not be empty.");
         }
 
-        private SalesDTO CreateSalesDTO(DateTime Date, int ProductId = 1, string ProductName = "Test Product", decimal Quantity = 1m, decimal Price = 1m)
+        private SaleDTO CreateSalesDTO(DateTime Date, int ProductId = 1, string ProductName = "Test Product", decimal Quantity = 1m, decimal Price = 1m)
         {
-            return new SalesDTO(ProductId, ProductName, Quantity, Price, Date);
+            return new SaleDTO(ProductId, ProductName, Quantity, Price, Date);
         }
     }
 }

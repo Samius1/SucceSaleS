@@ -7,7 +7,7 @@ namespace SucceSales.Storage.Repositories
 
     public interface ISalesRepository
     {
-        Task<Sale> GetByIdAsync(int id);
+        Sale GetById(int id);
         Task AddAsync(Sale sale);
         Task<IEnumerable<Sale>> GetByPeriod(DateTime start, DateTime end);
     }

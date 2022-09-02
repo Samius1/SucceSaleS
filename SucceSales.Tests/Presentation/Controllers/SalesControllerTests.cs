@@ -5,8 +5,8 @@ namespace SucceSales.Tests.Presentation.Controllers
     using Microsoft.Extensions.Logging;
     using Moq;
     using NFluent;
-    using SucceSales.Storage;
-    using SucceSales.Storage.Entities;
+    using SucceSales.Domain.Entities;
+    using SucceSales.Domain.Services;
     using SucceSales.Presentation.Controllers;    
     using SucceSales.Presentation.DTOs;
     using System;
@@ -16,55 +16,47 @@ namespace SucceSales.Tests.Presentation.Controllers
     public class SalesControllerTests
     {
         private readonly SalesController _salesController;
-        private readonly Sales _firstSale = new Sales(0, 1, "Banana", 3m, 5m, DateTime.Now);
+        private readonly Mock<ISaleDomainService> _saleDomainService = new();
 
         public SalesControllerTests()
         {
             var salesLogger = new Mock<ILogger<SalesController>>();
-            var options = new DbContextOptionsBuilder<SucceSalesContext>()
-                .UseInMemoryDatabase("AllSales").Options;
-
-            var salesContext = new SucceSalesContext(options);
-            salesContext.Sales.Add(_firstSale);
-
-            _salesController = new SalesController(salesLogger.Object, salesContext);
+            _salesController = new SalesController(salesLogger.Object, _saleDomainService.Object);
         }
 
         [Fact]
-        public void TestPostSale_PostNewSale_ReturnsCreated201()
+        public void TestPostSale_PostNewSale_ReturnsOk()
         {
-            var expectedSale = new SalesDTO(1, "Banana", 4.0m, 5.0m, DateTime.Now);
+            var expectedSale = new SaleDTO(1, "Banana", 4.0m, 5.0m, DateTime.Now);
             
             var result = _salesController.PostSale(expectedSale);
 
-            Check.That(result.Result.Result).IsInstanceOf<CreatedAtActionResult>();
-            var actionResult = (CreatedAtActionResult)result.Result.Result;
-            Check.That(actionResult.StatusCode).IsEqualTo(201);
-            Check.That(actionResult.Value).IsEqualTo(expectedSale).And.IsInstanceOf<SalesDTO>();
+            Check.That(result.Result).IsInstanceOf<OkResult>();
         }
 
         [Fact]
         public void TestGetSale_SearchForFirstSale_ReturnsFirstSale()
         {
-            var result = _salesController.GetSale(1);
+            var actualDate = DateTime.Now;
+            _saleDomainService
+                .Setup(x => x.GetSaleById(It.IsAny<int>()))
+                .Returns(new SaleMessage(1, "Banana", 4.0m, 5.0m, actualDate));
 
-            Check.That(result.Result).IsInstanceOf<ActionResult<Sales>>();
-            var actionResult = (ActionResult<Sales>)result.Result;
-            Check.That(actionResult.Value).IsEqualTo(_firstSale).And.IsInstanceOf<Sales>();
+            var actionResult = _salesController.GetSale(1);
+
+            Check.That(actionResult).IsNotEqualTo(null);
+            var result = actionResult.Result as OkObjectResult;
+            Check.That(result).IsNotEqualTo(null);
+            Check.That(result.Value).IsEqualTo(new SaleDTO(1, "Banana", 4.0m, 5.0m, actualDate));
         }
 
         [Fact]
         public void TestGetSale_SearchForNonExistingSale_ReturnsNotFound404()
         {
-            var result = _salesController.GetSale(-1);
+            var actionResult = _salesController.GetSale(-1);
 
-            Check.That(result.Result).IsInstanceOf<ActionResult<Sales>>();
-            var actionResult = (ActionResult<Sales>)result.Result;
-            Check.That(actionResult.Value).IsEqualTo(null);
-
+            Check.That(actionResult).IsNotEqualTo(null);
             Check.That(actionResult.Result).IsInstanceOf<NotFoundResult>();
-            var notFoundResult = (NotFoundResult)actionResult.Result;
-            Check.That(notFoundResult.StatusCode).IsEqualTo(404);
         }
     }
 }
