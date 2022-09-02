@@ -6,7 +6,7 @@ namespace SucceSales.Storage
 
     public class SucceSalesContext : DbContext
     {
-        public virtual DbSet<Sales> Sales { get;set; }
+        public virtual DbSet<Sale> Sales { get;set; }
 
         public SucceSalesContext(DbContextOptions<SucceSalesContext> options) : base(options)
         {
@@ -14,7 +14,7 @@ namespace SucceSales.Storage
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Sales>(entity =>
+            modelBuilder.Entity<Sale>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
