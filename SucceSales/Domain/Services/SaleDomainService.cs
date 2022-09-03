@@ -37,7 +37,7 @@ namespace SucceSales.Domain.Services
             var sales = await _salesRepository.GetByPeriod(initialDate, finalDate);
             var saleMessages = new List<SaleMessage>();
             foreach(var sale in sales
-                            .GroupBy(x => new { x.Date, x.ProductId })
+                            .GroupBy(x => new { x.Date.Date, x.ProductId })
                             .Select(x => new { x.Key.ProductId, x.Key.Date, TotalSales = x.ToList()})
                             .ToList())
             {

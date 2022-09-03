@@ -57,3 +57,5 @@ There is some technical debt that should be address in the future to continue th
 4. **Add documentation where it is needed.** Some code may not be well documented depending on the developer perspective. Since we followed the KISS principle, we tried to focus more on the development.
 5. **Deploy to Kubernetes. Use of Helm, lint the chart, etc.** It would have been nice to deploy this microservice on the cloud to a Kubernetes cluster. It would have improved the perspective of this course, broaden the knowledge of the students in this matter.
 6. **Refactor the code.** Some functionality may be encapsulated to create more robust tests.
+7. **Add sonarqube to the project.** This will ensure us that our project is flawless from the code perspective. 
+8. **Add more testing.** It would be interesing to realize different techniques that were not used during the development of this project, as mutation testing for example. 
