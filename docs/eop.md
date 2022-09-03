@@ -33,6 +33,8 @@ Our microservice has three main layers.
 
 If the microservice were a little bit bigger, we would have considered to add a service orchestration layer to handle its dependencies between the internal services.
 
+So as you can see, each layer has its unique focus and has its own responsibilities. This enhances the layers to be decoupled from each other, even though at the end we have some dependency injection. But since it is based on an abstraction, we could easily change the classes.
+
 ### Endpoints
 There are 4 main endpoints, order by importance to the final users.
 1. **GetShoppingList.** The main goal of this project is this endpoint. It shows the user what they should buy for the next day.
