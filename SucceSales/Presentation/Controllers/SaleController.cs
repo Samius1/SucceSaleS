@@ -47,6 +47,13 @@
         }
 
         [HttpGet]
+        public async Task<IEnumerable<ReportDTO>> GetShoppingList(DateTime? initialDate, DateTime? finalDate)
+        {   
+            var sales = await _salesDomainService.GenerateShoppingList(initialDate, finalDate);
+            return ConvertSaleMessagesToReportDTOList(sales);
+        }
+
+        [HttpGet]
         public async Task<IEnumerable<ReportDTO>> GetSalesReport(DateTime initialDate, DateTime finalDate)
         {   
             var sales = await _salesDomainService.GenerateSalesReport(initialDate, finalDate);

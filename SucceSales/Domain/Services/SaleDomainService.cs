@@ -48,5 +48,32 @@ namespace SucceSales.Domain.Services
 
             return saleMessages;
         }
+
+        public async Task<IEnumerable<SaleMessage>> GenerateShoppingList(DateTime? initialDate, DateTime? finalDate)
+        {
+            var start = initialDate.HasValue ? initialDate.Value : DateTime.Now.AddDays(-7);
+            var end = initialDate.HasValue ? initialDate.Value : DateTime.Now.Date;
+
+            if (start > end){
+                var auxDate = start;
+                start = end;
+                end = auxDate;
+            }
+
+            var numberOfDays = (end - start).Days;
+            var sales = await _salesRepository.GetByPeriod(start, end);
+            var saleMessages = new List<SaleMessage>();
+            foreach(var sale in sales
+                            .GroupBy(x => new { x.Date, x.ProductId })
+                            .Select(x => new { x.Key.ProductId, x.Key.Date, TotalSales = x.ToList()})
+                            .ToList())
+            {
+                var defaultSale = sale.TotalSales.First();
+                saleMessages.Add(new SaleMessage(sale.ProductId, defaultSale.ProductName, 
+                                sale.TotalSales.Sum(x => x.Quantity)/(numberOfDays * 1.0m), defaultSale.Price, sale.Date));
+            }
+
+            return saleMessages;
+        }
     }
 }

@@ -20,7 +20,9 @@ When you think about microservices, you can't help but think about encapsulated 
 
 We have tried to structure and develop the application following this decisions.
 1. **KISS principle.** We are going to develop a microservice that has one single resposibility, so there is no need to complicate the project. Create one entity per layer should be enough for the porpouse of the microservice. We finally created two entities on the application layer because it could be confusing for the user having the price in a shopping list. It may make the user believe that the recommended price for that product is the one being shown, while that was not true.
+We use the same function to retrieve data for the sales report and for the shopping list, instead of creating different functions, which will break the DRY principle. **D**on't **R**epeat **Y**ourself.
 2. **DDD.** Domain-Driven Development is probably the best fit for any top-notch development. In this case, it was pretty obvious that DDD was our best fit. It is focused on the domain of the problem and it allows the microservice to be more focus on its main goal. Clearly, we know that TDD is also one of the best techniques, so even though we used DDD, we still tried to create the tests always before the actual code.
+Retrieving the same data as we mentioned in the KISS principle, but applying different algorithm is just an example of a good domain study, as we did when we created the project.
 3. **SOLID principles.** As they state, they just perfectly fit in the philosophy of the microservice: each class should have one responsibility, as the microservice should be focus on one functionality; we can extend our functionality but we should not disrupt the actual behaviour of the microservice, etc.
 
 ## Layers
@@ -54,3 +56,4 @@ There is some technical debt that should be address in the future to continue th
 3. **Improve the sales report.** Allow the user to customize it depending on some parameters.
 4. **Add documentation where it is needed.** Some code may not be well documented depending on the developer perspective. Since we followed the KISS principle, we tried to focus more on the development.
 5. **Deploy to Kubernetes. Use of Helm, lint the chart, etc.** It would have been nice to deploy this microservice on the cloud to a Kubernetes cluster. It would have improved the perspective of this course, broaden the knowledge of the students in this matter.
+6. **Refactor the code.** Some functionality may be encapsulated to create more robust tests.

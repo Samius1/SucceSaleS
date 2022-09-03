@@ -12,5 +12,7 @@ namespace SucceSales.Domain.Services
         Task SaveAsync(SaleMessage saleMessage);
 
         Task<IEnumerable<SaleMessage>> GenerateSalesReport(DateTime initialDate, DateTime finalDate);
+
+        Task<IEnumerable<SaleMessage>> GenerateShoppingList(DateTime? initialDate, DateTime? finalDate);
     }
 }
