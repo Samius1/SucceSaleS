@@ -65,6 +65,14 @@ In our case, we just change the log type to show how it could be used.
 In a real life scenario, we would have declared all the specific environment data, as the database string connection.
 
 ## Log tool
+For logging porpouse, we have used the standard log that provides the .NET framework. .NET framework supports tons of different third-party loggins and have its own built-in ones.
+
+Since the default one is pretty stable, which actually uses dependency injection. We can read more about it in the [documentation](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line). As we stated before, we can configure some of its properties from the appsettings.json.
+
+We did not add any special log because our microservice its a small one. We could have add some after any critical operation, one log at the beggining of each call to store information as the correlation id of the call.
+
+Logging slow-code calls could us help find out where we can improve the performance of our microservice. 
+
 
 ## Final testing
 For the final testing, we are going to use 
