@@ -45,6 +45,18 @@ namespace SucceSales.Tests.Domain.Services
         }
 
         [Fact]
+        public void TestGetSaleById_SaleDoesNotExist_ReturnsNull()
+        {
+            _salesRepository
+                .Setup(x => x.GetById(It.IsAny<int>()))
+                .Returns((Sale)null);
+
+            var result = _salesDomainService.GetSaleById(1);
+
+            Check.That(result).IsEqualTo(null);
+        }
+
+        [Fact]
         public void TestSaveAsync_AddAsyncIsCalled()
         {
             _salesRepository

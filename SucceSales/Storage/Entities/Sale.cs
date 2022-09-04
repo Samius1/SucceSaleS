@@ -20,7 +20,7 @@ namespace SucceSales.Storage.Entities
             Quantity = quantity;
             Price = price;
             Date = date;
-            TotalImport = totalImport;  
+            TotalImport = totalImport;
         }
     }
 }

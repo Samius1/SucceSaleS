@@ -30,7 +30,7 @@ namespace SucceSales.Storage.Repositories
 
         public async Task<IEnumerable<Sale>> GetByPeriod(DateTime start, DateTime end)
         {
-            return await _dbContext.Set<Sale>().AsNoTracking().Where(x => x.Date >= start && x.Date <= end).ToListAsync();    
+            return await _dbContext.Set<Sale>().AsNoTracking().Where(x => x.Date >= start && x.Date <= end).ToListAsync();
         }
     }
 }
