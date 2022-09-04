@@ -11,7 +11,7 @@
     using Validators;
     
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class SalesController : ControllerBase
     {
         private readonly ILogger<SalesController> _logger;

@@ -20,8 +20,7 @@ namespace SucceSales.Domain.Services
         public SaleMessage GetSaleById(int Id)
         {
             var sale = _salesRepository.GetById(Id);
-
-            return new SaleMessage(sale.ProductId, sale.ProductName, sale.Quantity, sale.Price, sale.Date);
+            return sale == null ? null : new SaleMessage(sale.ProductId, sale.ProductName, sale.Quantity, sale.Price, sale.Date);
         }
 
         public async Task SaveAsync(SaleMessage saleMessage)
