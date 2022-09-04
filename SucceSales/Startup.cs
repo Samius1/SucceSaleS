@@ -29,7 +29,7 @@ namespace SucceSales
             });
             services.AddDbContext<SucceSalesContext>(opt =>
                                                opt.UseInMemoryDatabase("AllSales"));
-
+            services.AddScoped<DbContext, SucceSalesContext>();
             services.ConfigureDependencies();
         }
 

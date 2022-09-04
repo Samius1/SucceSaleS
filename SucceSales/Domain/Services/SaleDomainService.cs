@@ -51,8 +51,8 @@ namespace SucceSales.Domain.Services
 
         public async Task<IEnumerable<SaleMessage>> GenerateShoppingList(DateTime? initialDate, DateTime? finalDate)
         {
-            var start = initialDate.HasValue ? initialDate.Value : DateTime.Now.AddDays(-7);
-            var end = initialDate.HasValue ? initialDate.Value : DateTime.Now.Date;
+            var start = initialDate.HasValue ? initialDate.Value : DateTime.Now.AddDays(-8);
+            var end = finalDate.HasValue ? finalDate.Value : DateTime.Now.Date;
 
             if (start > end){
                 var auxDate = start;
@@ -64,13 +64,13 @@ namespace SucceSales.Domain.Services
             var sales = await _salesRepository.GetByPeriod(start, end);
             var saleMessages = new List<SaleMessage>();
             foreach(var sale in sales
-                            .GroupBy(x => new { x.Date, x.ProductId })
-                            .Select(x => new { x.Key.ProductId, x.Key.Date, TotalSales = x.ToList()})
+                            .GroupBy(x => new { x.ProductId })
+                            .Select(x => new { x.Key.ProductId, TotalSales = x.ToList()})
                             .ToList())
             {
                 var defaultSale = sale.TotalSales.First();
                 saleMessages.Add(new SaleMessage(sale.ProductId, defaultSale.ProductName, 
-                                sale.TotalSales.Sum(x => x.Quantity)/(numberOfDays * 1.0m), defaultSale.Price, sale.Date));
+                                sale.TotalSales.Sum(x => x.Quantity)/(numberOfDays * 1.0m), defaultSale.Price, defaultSale.Date));
             }
 
             return saleMessages;
