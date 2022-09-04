@@ -27,9 +27,9 @@ Retrieving the same data as we mentioned in the KISS principle, but applying dif
 
 ## Layers
 Our microservice has three main layers.
-1. Application layer. This layer can be found in the "Presentation" folder. This layer is the one responsible for reciving the initial call and trigger the process. It has almost no logic, just some syntaxtis validation in one case.
-2. Domain layer. This layer can be found in the "Domain" folder. It is responsible for applying the domain logic to the data.
-3. Data access layer. This layer can be found in the "Storage" folder. This layer just store and retrieve data from the database.
+1. **Application layer.** This layer can be found in the "Presentation" folder. This layer is the one responsible for reciving the initial call and trigger the process. It has almost no logic, just some syntaxtis validation in one case.
+2. **Domain layer.** This layer can be found in the "Domain" folder. It is responsible for applying the domain logic to the data.
+3. **Data access layer.** This layer can be found in the "Storage" folder. This layer just store and retrieve data from the database.
 
 If the microservice were a little bit bigger, we would have considered to add a service orchestration layer to handle its dependencies between the internal services.
 
@@ -43,6 +43,18 @@ There are 4 main endpoints, order by importance to the final users.
 4. **GetSale.** The main goal of this endpoint is testing. It allows the developers to test if a sale was posted successfully or not.
 
 ### Tests
+Our main focus has been to have a proper application with its proper cloud configuration. As we said before, we have been following the KISS principle, so we have created tests for each layer but just once.
+
+The first tests to be create are the application layer ones. In this layer, we just check that the microservice returns the expected response, while we mock the calls to the domain layer.
+
+Following the above approach, the domain layer tests are created. In this case, we make sure that the domain logic is being executed, mocking the calls to the data access layer. Those tests are pretty important. If they fail, it means our logic is not properly implemented.
+
+Finally, in the data access layer we define a test database to execute the integration tests. These are the most critical tests, as they check if everything is in place for our application to be run.
+
+We have a total of 20 tests, checking that each layer is working properly.
+![Successful test execution](./images/Test-AllTestsExecuted.png)
+
+We could have created more tests like component tests, system tests and so, but they would have followed the same pattern as the created ones. Create the tests, adapt the code to pass it and fix whatever is broken.
 
 ## Distributed configuration
 

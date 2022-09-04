@@ -12,7 +12,8 @@ namespace SucceSales.Tests.Storage.Repositories
     public class SalesRepositoryTests
     {
         private readonly SalesRepository _salesRepository;
-        private readonly Sale _firstSale = new Sale(0, 1, "Banana", 3m, 5m, DateTime.Now, 15m);
+        private static readonly DateTime DefaultDate = DateTime.Now;
+        private readonly Sale _firstSale = new Sale(0, 1, "Banana", 3m, 5m, DefaultDate, 15m);
 
         public SalesRepositoryTests()
         {
@@ -21,6 +22,7 @@ namespace SucceSales.Tests.Storage.Repositories
 
             var salesContext = new SucceSalesContext(options);
             salesContext.Sales.Add(_firstSale);
+            salesContext.SaveChanges();
 
             _salesRepository = new SalesRepository(salesContext);
         }
@@ -56,20 +58,20 @@ namespace SucceSales.Tests.Storage.Repositories
             Check.That(insertedSale.TotalImport).IsEqualTo(_firstSale.TotalImport);
         }
 
-        // [Fact]
-        // public void TestGetByPeriod_ReturnSale()
-        // {
-        //     var result = _salesRepository.GetByPeriod(DateTime.Now.Date.AddDays(-2), DateTime.Now.Date.AddDays(1));
+        [Fact]
+        public void TestGetByPeriod_ReturnSale()
+        {
+            var result = _salesRepository.GetByPeriod(DateTime.Now.Date.AddDays(-2), DateTime.Now.Date.AddDays(1));
 
-        //     Check.That(result.Result).IsNotEqualTo(null);
-        //     Check.That(result.Result.Count()).IsEqualTo(1);
-        //     Check.That(result.Result.First().Id).IsEqualTo(1);
-        //     Check.That(result.Result.First().ProductId).IsEqualTo(_firstSale.ProductId);
-        //     Check.That(result.Result.First().ProductName).IsEqualTo(_firstSale.ProductName);
-        //     Check.That(result.Result.First().Quantity).IsEqualTo(_firstSale.Quantity);
-        //     Check.That(result.Result.First().Price).IsEqualTo(_firstSale.Price);
-        //     Check.That(result.Result.First().Date).IsEqualTo(_firstSale.Date);
-        //     Check.That(result.Result.First().TotalImport).IsEqualTo(_firstSale.TotalImport);
-        // }
+            Check.That(result.Result).IsNotEqualTo(null);
+            Check.That(result.Result.Count()).IsEqualTo(1);
+            Check.That(result.Result.First().Id).IsEqualTo(1);
+            Check.That(result.Result.First().ProductId).IsEqualTo(_firstSale.ProductId);
+            Check.That(result.Result.First().ProductName).IsEqualTo(_firstSale.ProductName);
+            Check.That(result.Result.First().Quantity).IsEqualTo(_firstSale.Quantity);
+            Check.That(result.Result.First().Price).IsEqualTo(_firstSale.Price);
+            Check.That(result.Result.First().Date).IsEqualTo(_firstSale.Date);
+            Check.That(result.Result.First().TotalImport).IsEqualTo(_firstSale.TotalImport);
+        }
     }
 }
