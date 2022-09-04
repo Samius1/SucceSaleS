@@ -39,11 +39,16 @@
         [HttpPost]
         public async Task<ActionResult> PostSale(SaleDTO sale)
         {
-            SalesSyntacticValidator.ValidateSale(sale);
+            var errors = SalesSyntacticValidator.ValidateSale(sale);
 
-            await _salesDomainService.SaveAsync(new SaleMessage(sale.ProductId, sale.ProductName, sale.Quantity, sale.Price, sale.Date));
+            if(string.IsNullOrEmpty(errors))
+            {
+                await _salesDomainService.SaveAsync(new SaleMessage(sale.ProductId, sale.ProductName, sale.Quantity, sale.Price, sale.Date));
             
-            return Ok();
+                return Ok();
+            }
+
+            return BadRequest(errors);
         }
 
         [HttpGet]

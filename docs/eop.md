@@ -11,7 +11,7 @@ When we were designing the microservice, there was a brainstorming. Should we fo
 * KISS stands for **K**eep **It** **S**imple **S**tupid
 * TDD stands for **T**est-**D**riven **D**evelopment
 * BDD stands for **B**ehaviour-**D**riven **D**evelopment
-* DDD stands for **D**omain **D**riven **D**evelopment
+* DDD stands for **D**omain-**D**riven **D**evelopment
 
 It was crystal clear that we were going to use C# as our language. It is gaining popularity step by step and I have been developing with it for 4 years at the moment, so it was the perfect chance to try to take it a little bit further. Would it be possible to create a microservice with C#? My heart said yes but my mind was not sure. Searcing over the internet, there was this [detailed article](https://raw.githubusercontent.com/dotnet-architecture/eBooks/main/current/microservices/NET-Microservices-Architecture-for-Containerized-NET-Applications.pdf) that was focus on developing a microservice on C#. It was pretty interesting and it had tons of technical documentation, so it seemed like C# is a pretty solid choice for the porpouse of both the course goal and my personal goal. 
 
@@ -51,7 +51,7 @@ Following the above approach, the domain layer tests are created. In this case, 
 
 Finally, in the data access layer we define a test database to execute the integration tests. These are the most critical tests, as they check if everything is in place for our application to be run.
 
-We have a total of 20 tests, checking that each layer is working properly.
+We have a total of 21 tests, checking that each layer is working properly.
 ![Successful test execution](./images/Test-AllTestsExecuted.png)
 
 We could have created more tests like component tests, system tests and so, but they would have followed the same pattern as the created ones. Create the tests, adapt the code to pass it and fix whatever is broken.
@@ -71,11 +71,34 @@ Since the default one is pretty stable, which actually uses dependency injection
 
 We did not add any special log because our microservice its a small one. We could have add some after any critical operation, one log at the beggining of each call to store information as the correlation id of the call.
 
-Logging slow-code calls could us help find out where we can improve the performance of our microservice. 
-
+Logging slow or complex code calls could us help find out where we can improve the performance of our microservice, or what should be escalated to serve a better microservice to the client. 
 
 ## Final testing
-For the final testing, we are going to use 
+For the final testing, we are going to use [Postman](https://www.postman.com/) to check that the microservice is properly working. Postman allows us to do calls to the microservice in a pretty straight forward, easy way.
+
+The first step is to run a container with our image, so we can set the system with sales and try our shopping list functionality. We just run the following command to have a container working (add -d to run the container in background mode).
+
+	docker run -p 8080:8080 samius1/succesales:latest	
+
+During this tests we could check that out functionality is properly working. We first check that the microservice returns a 404 error if it can't find a sale.
+![Sale not found](./images/Test-SaleNotFound.png) 
+
+Then, we add a new sale and we try to retrieve it. Both operations success with a 200 response.
+![Add new sale](./images/Test-SaleAdded.png) 
+![New sale found](./images/Test-SaleFound.png) 
+
+After that, we try to add a sale that doesn't fulfill the validations, so we should get a BadRequest response.
+![Bad request response](./images/Test-ValidationNotPassed.png)
+As you can see, we also get the full error message.
+
+Then, we use a [bash script](./insertMultipleData.sh) we have created to set up an environment with a high number of sales, so we can test our last functionality of the microservice with multiple data.
+
+![Shopping list](./images/Test-ShoppingList.png)
+![Sale list](./images/Test-SaleList.png)
+
+The data may seem weird, but it is because we set the date to 8th of September without initial date, which is then set to 8 days before today, resulting in a total of 11 days. 505 sold strawberrys / 11 days = 45.90, as you can see in the picture.
+
+So finally, everything is working properly and we just have the MVP set in place to be deployed on cloud.
 
 ## Future steps
 There is some technical debt that should be address in the future to continue this project. Also, there are some improvements that would be a nice to have.
@@ -86,4 +109,5 @@ There is some technical debt that should be address in the future to continue th
 5. **Deploy to Kubernetes. Use of Helm, lint the chart, etc.** It would have been nice to deploy this microservice on the cloud to a Kubernetes cluster. It would have improved the perspective of this course, broaden the knowledge of the students in this matter.
 6. **Refactor the code.** Some functionality may be encapsulated to create more robust tests.
 7. **Add sonarqube to the project.** This will ensure us that our project is flawless from the code perspective. 
-8. **Add more testing.** It would be interesing to realize different techniques that were not used during the development of this project, as mutation testing for example. 
+8. **Add more testing.** It would be interesing to realize different techniques that were not used during the development of this project, as mutation testing for example.
+9. **Beautify the output.** We can truncate the decimals to show just 2 digits, but it was out of the scope, so we create a new user history to handle the data formatting.
