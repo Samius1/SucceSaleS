@@ -1,8 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS builder
 WORKDIR /SucceSales
 COPY . .
-RUN dotnet restore
-RUN dotnet publish -c Release -o out
+RUN ./build.sh
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine
 WORKDIR /SucceSales
