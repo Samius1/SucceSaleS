@@ -9,4 +9,4 @@ entidad:
 test: 
   - SucceSales.Tests/Controllers/SalesControllerTests.cs
 
-make: ./build.sh
+make: build.sh
