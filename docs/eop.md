@@ -57,6 +57,12 @@ We have a total of 20 tests, checking that each layer is working properly.
 We could have created more tests like component tests, system tests and so, but they would have followed the same pattern as the created ones. Create the tests, adapt the code to pass it and fix whatever is broken.
 
 ## Distributed configuration
+The distributed configuration is handle by the appsettings.json. It allows the programmer to create unique configurations for each environment where the app is going to be deployed such as different URLs or different log levels.
+
+To use it, we just need to fill the **ASPNETCORE_ENVIRONMENT** variable. 
+
+In our case, we just change the log type to show how it could be used.
+In a real life scenario, we would have declared all the specific environment data, as the database string connection.
 
 ## Log tool
 
