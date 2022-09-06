@@ -8,7 +8,7 @@ script:
   - dotnet test SucceSales.Tests/SucceSales.Tests.csproj --configuration Release --nologo --blame
 
 after_success:
-  -| 
+  - | 
     if [ "$TRAVIS_BRANCH" == "main" ]; then
       echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
       docker build -t $DOCKER_USERNAME/succesales:latest .;
